@@ -1,5 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { BookGridList } from "~/components/book-grid-list/book-grid-list";
 import { ThemeToggle } from "~/components/theme-toggle/theme-toggle";
 
 export default component$(() => {
@@ -15,6 +16,7 @@ export default component$(() => {
         <button class="btn">123</button>
       </div>
       <ThemeToggle />
+      <BookGridList />
     </>
   );
 });
