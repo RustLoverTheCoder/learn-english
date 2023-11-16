@@ -1,21 +1,25 @@
-import { component$, event$, useContext, useStyles$ } from '@builder.io/qwik';
-import { SunAndMoon } from './sun-and-moon';
-import { themeStorageKey } from '../router-head/theme-script';
-import themeToggle from './theme-toggle.css?inline';
-import { GlobalStore } from '../../context';
+import { component$, event$, useContext, useStyles$ } from "@builder.io/qwik";
+import { SunAndMoon } from "./sun-and-moon";
+import { themeStorageKey } from "../router-head/theme-script";
+import themeToggle from "./theme-toggle.css?inline";
+import { GlobalStore } from "../../context";
 
-export type ThemePreference = 'dark' | 'light';
+export type ThemePreference = "dark" | "light";
 
-export const colorSchemeChangeListener = (onColorSchemeChange: (isDark: boolean) => void) => {
+export const colorSchemeChangeListener = (
+  onColorSchemeChange: (isDark: boolean) => void,
+) => {
   const listener = ({ matches: isDark }: MediaQueryListEvent) => {
     onColorSchemeChange(isDark);
   };
   window
-    .matchMedia('(prefers-color-scheme: dark)')
-    .addEventListener('change', (event) => listener(event));
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (event) => listener(event));
 
   return () =>
-    window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', listener);
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .removeEventListener("change", listener);
 };
 
 export const setPreference = (theme: ThemePreference) => {
@@ -24,14 +28,16 @@ export const setPreference = (theme: ThemePreference) => {
 };
 
 export const reflectPreference = (theme: ThemePreference) => {
-  document.firstElementChild?.setAttribute('data-theme', theme);
+  document.firstElementChild?.setAttribute("data-theme", theme);
 };
 
 export const getColorPreference = (): ThemePreference => {
   if (localStorage.getItem(themeStorageKey)) {
     return localStorage.getItem(themeStorageKey) as ThemePreference;
   } else {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   }
 };
 
@@ -40,14 +46,16 @@ export const ThemeToggle = component$(() => {
   const state = useContext(GlobalStore);
 
   const onClick$ = event$(() => {
-    state.theme = state.theme === 'light' ? 'dark' : 'light';
+    state.theme = state.theme === "light" ? "dark" : "light";
     setPreference(state.theme);
   });
 
   return (
     <>
       <span class="lg:hidden">
-        <button onClick$={onClick$}>{state.theme === 'light' ? 'Dark' : 'Light'} theme</button>
+        <button onClick$={onClick$}>
+          {state.theme === "light" ? "Dark" : "Light"} theme
+        </button>
       </span>
       <span class="hidden lg:block">
         <button
