@@ -1,10 +1,12 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { BookGridList } from "~/components/book-grid-list/book-grid-list";
+import { SearchHeader } from "~/components/search-header/search-header";
 
 export default component$(() => {
   return (
     <>
+      <SearchHeader />
       <BookGridList />
     </>
   );
