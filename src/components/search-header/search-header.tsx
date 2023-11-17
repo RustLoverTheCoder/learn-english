@@ -13,8 +13,8 @@ export const SearchHeader = component$(() => {
         >
           <div class="form-control flex w-full items-center justify-center">
             <input
-              type="text"
-              placeholder="Type here"
+              type="search"
+              placeholder="Search"
               class="input input-bordered w-full max-w-lg"
             />
           </div>
