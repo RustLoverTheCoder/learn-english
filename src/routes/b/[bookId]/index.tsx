@@ -1,5 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
+import { BookDetail } from "~/components/book-detail/book-detail";
 
 export const useBookDetail = routeLoader$(async (requestEvent) => {
   const bookId = requestEvent.params.bookId;
@@ -9,7 +10,12 @@ export const useBookDetail = routeLoader$(async (requestEvent) => {
 
 export default component$(() => {
   const book = useBookDetail();
-  return <>bookId: {book.value}</>;
+  console.log("book", book.value);
+  return (
+    <>
+      <BookDetail />
+    </>
+  );
 });
 
 export const head: DocumentHead = {
